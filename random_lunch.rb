@@ -44,6 +44,17 @@ class RandomLunch
       EOS
     end
 
+    Mail.defaults do
+      delivery_method :smtp, {
+        :address        => 'smtp.sendgrid.net',
+        :port           => 25,
+        :authentication => 'plain',
+        :user_name      => ENV['SENDGRID_USERNAME'],
+        :password       => ENV['SENDGRID_PASSWORD'],
+        :domain         => ENV['SENDGRID_DOMAIN'],
+      }
+    end
+
     mail = Mail.new do
       from    'komagata@gmail.com'
       to      'komagata@gmail.com,machidanohimitsu@gmail.com'
@@ -51,7 +62,6 @@ class RandomLunch
       body    body
     end
 
-    mail.delivery_method :sendmail
     mail.deliver
   end
 end
