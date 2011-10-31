@@ -1,4 +1,4 @@
-require 'random_lunch'
+require './random_lunch'
 
 desc 'Send random lunch mail'
 task :cron do
