@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'bundler'
-Bundler.setup
 require 'nokogiri'
 require 'mail'
 require 'open-uri'
@@ -45,19 +42,24 @@ class RandomLunch
     end
 
     Mail.defaults do
-      delivery_method :smtp, {
-        :address        => 'smtp.sendgrid.net',
-        :port           => 25,
-        :authentication => 'plain',
-        :user_name      => ENV['SENDGRID_USERNAME'],
-        :password       => ENV['SENDGRID_PASSWORD'],
-        :domain         => ENV['SENDGRID_DOMAIN'],
-      }
+      if ENV['SENDGRID_USERNAME']
+        delivery_method :smtp, {
+          :address        => 'smtp.sendgrid.net',
+          :port           => 25,
+          :authentication => 'plain',
+          :user_name      => ENV['SENDGRID_USERNAME'],
+          :password       => ENV['SENDGRID_PASSWORD'],
+          :domain         => ENV['SENDGRID_DOMAIN'],
+        }
+      else
+        delivery_method :sendmail
+      end
     end
 
     mail = Mail.new do
       from    'komagata@gmail.com'
-      to      'komagata@gmail.com,machidanohimitsu@gmail.com'
+#      to      'komagata@gmail.com,machidanohimitsu@gmail.com'
+      to      'komagata@gmail.com'
       subject "Today's recommended restaurants"
       body    body
     end
