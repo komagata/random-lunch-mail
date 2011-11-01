@@ -8,4 +8,4 @@ handler do |job|
   RandomLunch.new.sendmail
 end
 
-every 1.minutes, 'sendmail'
+every 1.days, 'sendmail', :at => '12:00'
