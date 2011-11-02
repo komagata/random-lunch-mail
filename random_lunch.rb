@@ -58,8 +58,7 @@ class RandomLunch
 
     mail = Mail.new do
       from    'komagata@gmail.com'
-#      to      'komagata@gmail.com,machidanohimitsu@gmail.com'
-      to      'komagata@gmail.com'
+      to      'komagata@gmail.com,machidanohimitsu@gmail.com'
       subject "Today's recommended restaurants"
       body    body
     end
